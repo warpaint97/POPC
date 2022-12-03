@@ -68,9 +68,7 @@ for ex in range(3):
                 X = createDataSet(7, 20, 30, 3)
 
         kmeans = KMeans(n_clusters=7, random_state=0).fit(X)
-        result = []
-        for i in range(len(X)):
-                result.append([kmeans.labels_[i], X[i]])
+        result = zip(kmeans.labels_, X)
         display(result, 'kmeans example {}'.format(ex + 1))
         print('kmeans number of clusters [it was requested]: ', 7)
 
