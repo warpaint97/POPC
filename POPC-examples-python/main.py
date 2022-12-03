@@ -15,12 +15,10 @@ if __name__ == '__main__':
                 if ex == 2:
                         X = createDataSet(7, 20, 30, 3)
 
-                kmeans = KMeans(n_clusters=7, random_state=0).fit(X)
-                result = zip(kmeans.labels_, X)
-                display(result, 'kmeans example {}'.format(ex + 1))
+                y_kmeans = KMeans(n_clusters=7, random_state=0).fit(X).labels_
+                display(X, y_kmeans, 'kmeans example {}'.format(ex + 1))
                 print('kmeans number of clusters [it was requested]: ', 7)
 
-                labels = popc(X)
-                result = zip(labels, X)
-                display(result, 'popc example {}'.format(ex + 1))
-                print('popc number of clusters: ', len(np.unique(labels)))
+                y_popc = popc(X)
+                display(X, y_popc, 'popc example {}'.format(ex + 1))
+                print('popc number of clusters: ', len(np.unique(y_popc)))
