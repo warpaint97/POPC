@@ -1,4 +1,5 @@
 from sklearn.cluster import KMeans
+import numpy as np
 import random
 from disp import display
 from popc import popc
@@ -20,8 +21,6 @@ if __name__ == '__main__':
                 print('kmeans number of clusters [it was requested]: ', 7)
 
                 labels = popc(X)
-                result = []
-                for i in range(len(X)):
-                        result.append([labels[i], X[i]])
+                result = zip(labels, X)
                 display(result, 'popc example {}'.format(ex + 1))
-                print('popc number of clusters: ', len(dict.fromkeys(labels, True)))
+                print('popc number of clusters: ', len(np.unique(labels)))
