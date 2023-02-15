@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def display(samples, labels, title, size=1):
+def display(samples, labels, title, size=1, cmap='Spectral'):
         fig = plt.gcf()
         fig.set_size_inches(12, 7)
 
@@ -20,7 +20,7 @@ def display(samples, labels, title, size=1):
                                 Y.append(y)
                                 C.append(labels[y])
 
-        plt.scatter(X, Y, c=C, cmap='Spectral', s=size)
+        plt.scatter(X, Y, c=C, cmap=cmap, s=size)
         plt.title(title)
         plt.show()
 
