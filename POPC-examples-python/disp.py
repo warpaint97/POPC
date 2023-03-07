@@ -1,10 +1,9 @@
+
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
 
-def display(samples, labels, title, size=1, cmap='Spectral', export_path=None):
-        fig = plt.gcf()
-        fig.set_size_inches(12, 7)
-
-        #colors = ['b','g','r','c','m','y','k']
+def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral', export_path=None):
         labelsWithSamples = sorted(zip(samples, labels), key=lambda s: s[1])
         samples, labels = zip(*labelsWithSamples)
 
@@ -20,8 +19,21 @@ def display(samples, labels, title, size=1, cmap='Spectral', export_path=None):
                                 Y.append(y)
                                 C.append(labels[y])
 
-        plt.scatter(X, Y, c=C, cmap=cmap, s=size)
+        #plt.scatter(X, Y, c=C, cmap=cmap, s=size, label=Y)
+        X = np.array(X)
+        Y = np.array(Y)
+        C = np.array(C)
+        norm = mpl.colors.Normalize(vmin=min(C), vmax=max(C))
+        fig, ax = plt.subplots()
+        fig.set_size_inches(12, 7)
+        for g in np.unique(C):
+            ix = np.where(C == g)[0]
+            ax.scatter(X[ix], Y[ix], c=[g]*len(ix), cmap=cmap, label=g, s=size, norm=norm)
+        ax.legend()
+
         plt.title(title)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         if export_path != None:
             plt.savefig(export_path, bbox_inches="tight")
         plt.show()
