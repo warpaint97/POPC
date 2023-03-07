@@ -24,12 +24,18 @@ def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral
         Y = np.array(Y)
         C = np.array(C)
         norm = mpl.colors.Normalize(vmin=min(C), vmax=max(C))
+        n_clusters = len(np.unique(C))
         fig, ax = plt.subplots()
         fig.set_size_inches(12, 7)
         for g in np.unique(C):
             ix = np.where(C == g)[0]
-            ax.scatter(X[ix], Y[ix], c=[g]*len(ix), cmap=cmap, label=g, s=size, norm=norm)
-        ax.legend()
+            if n_clusters > 1:
+                colors = [g]*len(ix)
+            else:
+                colors = 'k'
+            ax.scatter(X[ix], Y[ix], c=colors, cmap=cmap, label=g, s=size, norm=norm)
+        if n_clusters > 1:
+            ax.legend()
 
         plt.title(title)
         plt.xlabel(xlabel)
