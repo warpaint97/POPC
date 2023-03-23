@@ -3,7 +3,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 
-def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral', export_path=None):
+def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral', export_path=None, fig_w=12, fig_h=7):
         labelsWithSamples = sorted(zip(samples, labels), key=lambda s: s[1])
         samples, labels = zip(*labelsWithSamples)
 
@@ -26,7 +26,7 @@ def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral
         norm = mpl.colors.Normalize(vmin=min(C), vmax=max(C))
         n_clusters = len(np.unique(C))
         fig, ax = plt.subplots()
-        fig.set_size_inches(12, 7)
+        fig.set_size_inches(fig_h, fig_w)
         for g in np.unique(C):
             ix = np.where(C == g)[0]
             if n_clusters > 1:
