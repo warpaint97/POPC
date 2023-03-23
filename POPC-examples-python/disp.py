@@ -26,7 +26,7 @@ def display(samples, labels, title, xlabel='', ylabel='', size=1, cmap='Spectral
         norm = mpl.colors.Normalize(vmin=min(C), vmax=max(C))
         n_clusters = len(np.unique(C))
         fig, ax = plt.subplots()
-        fig.set_size_inches(fig_h, fig_w)
+        fig.set_size_inches(fig_w, fig_h)
         for g in np.unique(C):
             ix = np.where(C == g)[0]
             if n_clusters > 1:
